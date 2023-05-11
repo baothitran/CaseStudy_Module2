@@ -7,7 +7,7 @@ import com.codegym.utils.DateUtils;
 import java.util.Date;
 import java.util.List;
 
-public class Order implements IModel<Order> {
+public class RentalOrder implements IModel<RentalOrder> {
     private long orderID;
     private long userID;
     private String userName;
@@ -16,10 +16,10 @@ public class Order implements IModel<Order> {
     private Date rentalDate;
     private Date returnDate;
     private EOrderStatus orderStatus;
-    private List<OrderItem> orderItems;
+    private List<RentalItem> orderItems;
     private double grandTotal;
 
-    public Order() {}
+    public RentalOrder() {}
 
     public long getOrderID() {
         return orderID;
@@ -85,11 +85,11 @@ public class Order implements IModel<Order> {
         this.orderStatus = orderStatus;
     }
 
-    public List<OrderItem> getOrderItems() {
+    public List<RentalItem> getOrderItems() {
         return orderItems;
     }
 
-    public void setOrderItems(List<OrderItem> orderItems) {
+    public void setOrderItems(List<RentalItem> orderItems) {
         this.orderItems = orderItems;
     }
 
@@ -118,8 +118,8 @@ public class Order implements IModel<Order> {
     }
 
     @Override
-    public Order parseData(String line) {
-        Order order = new Order();
+    public RentalOrder parseData(String line) {
+        RentalOrder order = new RentalOrder();
         String[] strings = line.split(",");
         int orderID = Integer.parseInt(strings[0]);
         int userID = Integer.parseInt(strings[1]);

@@ -82,6 +82,15 @@ public class Car implements IModel<Car> {
         this.status = status;
     }
 
+    public void updateCar (Car car) {
+        this.setId(car.getId());
+        this.setName(car.getName());
+        this.setBrand(car.getBrand());
+        this.setQuantity(car.getQuantity());
+        this.setType(car.getType());
+        this.setRentalPrice(car.getRentalPrice());
+        this.setStatus(car.getStatus());
+    }
     @Override
     public Car parseData(String line) {
         Car car = new Car();
@@ -106,14 +115,13 @@ public class Car implements IModel<Car> {
     }
     @Override
     public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", brand='" + brand + '\'' +
-                ", quantity=" + quantity +
-                ", type=" + type +
-                ", rentalPrice=" + rentalPrice +
-                ", status=" + status +
-                '}';
+        return
+                id +
+                "," + name+
+                "," + brand+
+                "," + quantity +
+                "," + type.getIdType() +
+                "," + CurrencyUtils.convertPriceToString(rentalPrice) +
+                "," + status.getId();
     }
 }

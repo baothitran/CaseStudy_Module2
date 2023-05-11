@@ -3,17 +3,17 @@ package com.codegym.model;
 import com.codegym.service.IModel;
 import com.codegym.utils.CurrencyUtils;
 
-public class OrderItem implements IModel<OrderItem> {
+public class RentalItem implements IModel<RentalItem> {
     private long id;
     private long carID;
     private long orderID;
     private int quantity;
     private double price;
 
-    public OrderItem() {
+    public RentalItem() {
     }
 
-    public OrderItem(long id, long carID, long orderID, int quantity, double price) {
+    public RentalItem(long id, long carID, long orderID, int quantity, double price) {
         this.id = id;
         this.carID = carID;
         this.orderID = orderID;
@@ -73,8 +73,8 @@ public class OrderItem implements IModel<OrderItem> {
     }
 
     @Override
-    public OrderItem parseData(String line) {
-        OrderItem orderItem = new OrderItem();
+    public RentalItem parseData(String line) {
+        RentalItem orderItem = new RentalItem();
         String[] strings = line.split(",");
         long id = Long.parseLong(strings[0]);
         long carID = Long.parseLong(strings[1]);

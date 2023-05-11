@@ -1,5 +1,6 @@
 package com.codegym.utils;
 
+import java.text.Normalizer;
 import java.util.regex.Pattern;
 
 public class ValidateUtils {

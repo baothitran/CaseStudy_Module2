@@ -9,19 +9,19 @@ public class User implements IModel<User> {
     private String username;
     private String password;
     private String fullname;
+    private String idcardnum;
     private String address;
     private String phone;
     private String email;
     private ERole role;
-    private Date createdDate;
-
     public User(){};
 
-    public User(long userID, String username, String password, String fullname, String address, String phone, String email, ERole role) {
+    public User(long userID, String username, String password, String fullname, String idcardnum,String address, String phone, String email, ERole role) {
         this.userID = userID;
         this.username = username;
         this.password = password;
         this.fullname = fullname;
+        this.idcardnum = idcardnum;
         this.address = address;
         this.phone = phone;
         this.email = email;
@@ -58,6 +58,14 @@ public class User implements IModel<User> {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public String getIdcardnum() {
+        return idcardnum;
+    }
+
+    public void setIdcardnum(String idcardnum) {
+        this.idcardnum = idcardnum;
     }
 
     public String getAddress() {
@@ -100,6 +108,7 @@ public class User implements IModel<User> {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", fullname='" + fullname + '\'' +
+                ", idcardnum='" + idcardnum + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
@@ -115,14 +124,16 @@ public class User implements IModel<User> {
         String username = strings[1];
         String password = strings[2];
         String fullname = strings[3];
-        String address = strings[4];
-        String phone = strings[5];
-        String email = strings[6];
-        ERole eRole = ERole.findRoleByString(strings[7]);
+        String idcardnum = strings[4];
+        String address = strings[5];
+        String phone = strings[6];
+        String email = strings[7];
+        ERole eRole = ERole.findRoleByString(strings[8]);
         user.setUserID(userID);
         user.setUsername(username);
         user.setPassword(password);
         user.setFullname(fullname);
+        user.setIdcardnum(idcardnum);
         user.setAddress(address);
         user.setPhone(phone);
         user.setEmail(email);

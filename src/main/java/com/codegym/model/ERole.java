@@ -3,6 +3,7 @@ package com.codegym.model;
 public enum ERole {
     ADMIN("Admin") , USER("User");
     private String value;
+
     ERole(String value){
         this.value = value;
     }

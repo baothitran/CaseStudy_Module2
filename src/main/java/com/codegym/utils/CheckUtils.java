@@ -76,7 +76,6 @@ public class CheckUtils {
         }
     }
     public static boolean checkContinueRemoveAction() {
-        System.out.println("Đã xoá thành công!");
         System.out.println("Bạn có muốn tiếp tục thao tác xoá không? Y/N");
         String choiceContinueRemoveAction = scanner.nextLine().trim().toLowerCase();
         switch (choiceContinueRemoveAction) {
@@ -86,6 +85,32 @@ public class CheckUtils {
                 return false;
             default:
                 System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
+                return true;
+        }
+    }
+    public static boolean checkContinueAddAction() {
+        System.out.println("Bạn có muốn tiếp tục thêm sản phẩm không? Y/N");
+        String choiceContinueAction = scanner.nextLine().trim().toUpperCase();;
+        switch (choiceContinueAction){
+            case "Y":
+                return true;
+            case "N":
+                return false;
+            default:
+                System.out.println("Lỗi! Vui lòng nhập lại");
+                return true;
+        }
+    }
+    public static boolean checkContinueUpdateAction(){
+        System.out.println("Bạn có muốn tiếp tục chỉnh sửa không? Y/N");
+        String choiceContinueActionUser = scanner.nextLine().trim().toUpperCase();;
+        switch (choiceContinueActionUser){
+            case "Y":
+                return true;
+            case "N":
+                return false;
+            default:
+                System.out.println("Lỗi! Vui lòng nhập lại");
                 return true;
         }
     }

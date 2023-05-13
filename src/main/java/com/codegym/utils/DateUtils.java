@@ -16,7 +16,6 @@ public class DateUtils {
     }
 
     public static String convertDateToString(Date date) {
-
         return formatter.format(date);
     }
 }

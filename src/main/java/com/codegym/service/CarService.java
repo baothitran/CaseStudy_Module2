@@ -87,11 +87,10 @@ public class CarService implements ICarService {
     }
 
     @Override
-    public List<Car> findCarByStatus(List<Car> carList, String statusName) {
+    public List<Car> findCarByStatus(List<Car> carList, int idCarStatus) {
         List<Car> cars = new ArrayList<>();
-        for (Car car1 : cars) {
-            String temp = String.valueOf(car1.getStatus());
-            if (temp.equals(statusName)) {
+        for (Car car1 : carList) {
+            if (car1.getStatus().getId() == idCarStatus) {
                 cars.add(car1);
             }
         }
@@ -99,8 +98,15 @@ public class CarService implements ICarService {
     }
 
     @Override
-    public List<Car> sortByPrice() {
-        return null;
+    public List<Car> findCarByType(List<Car> carList, int idType) {
+        List<Car> cars = new ArrayList<>();
+        for (Car car1 : carList) {
+            if (car1.getType().getIdType() == idType) {
+                cars.add(car1);
+            }
+        }
+        return cars;
     }
+
 
 }

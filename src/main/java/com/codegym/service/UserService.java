@@ -120,6 +120,15 @@ public class UserService implements IUserService{
     }
 
     @Override
+    public boolean existByIdCardNum(String idcardnum) {
+        List<User> users = getAllUsers();
+        for (User user:users) {
+            if (user.getIdcardnum().equals(idcardnum))
+                return true;
+        } return false;
+    }
+
+    @Override
     public boolean existByEmail(String email) {
         List<User> users = getAllUsers();
         for(User user : users) {

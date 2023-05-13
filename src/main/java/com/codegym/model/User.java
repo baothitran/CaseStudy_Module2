@@ -103,17 +103,15 @@ public class User implements IModel<User> {
 
     @Override
     public String toString() {
-        return "User{" +
-                "userID=" + userID +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", fullname='" + fullname + '\'' +
-                ", idcardnum='" + idcardnum + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", role=" + role +
-                '}';
+        return  userID +
+                "," + username +
+                "," + password +
+                "," + fullname +
+                "," + idcardnum +
+                "," + address +
+                "," + phone +
+                "," + email +
+                "," + role;
     }
 
     @Override
@@ -140,4 +138,8 @@ public class User implements IModel<User> {
         user.setRole(eRole);
         return user;
     }
+    public String toData() {
+        return String.format("║%15s║ %20s║ %15s║ %11s║ %15s║ %20s║ %15s║\n",userID,fullname,idcardnum,phone,address,email,role);
+    }
+
 }

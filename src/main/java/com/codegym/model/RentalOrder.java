@@ -103,18 +103,16 @@ public class RentalOrder implements IModel<RentalOrder> {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "orderID=" + orderID +
-                ", userID=" + userID +
-                ", userName='" + userName + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", rentalDate=" + rentalDate +
-                ", returnDate=" + returnDate +
-                ", orderStatus=" + orderStatus +
-                ", orderItems=" + orderItems +
-                ", grandTotal=" + grandTotal +
-                '}';
+        return orderID +
+                "," + userID +
+                "," + userName+
+                "," + address+
+                "," + phone+
+                "," + rentalDate +
+                "," + returnDate +
+                "," + orderStatus +
+                "," + orderItems +
+                "," + grandTotal;
     }
 
     @Override

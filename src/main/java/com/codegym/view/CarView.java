@@ -8,6 +8,7 @@ import com.codegym.model.ECarStatus;
 import com.codegym.model.EType;
 import com.codegym.service.CarService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,7 +32,7 @@ public class CarView {
                 int choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
-                        showCar();
+                        showCar(carService.getAllCars());
                         break;
                     case 2:
                         addCar();
@@ -46,7 +47,8 @@ public class CarView {
                         sortCar();
                         break;
                     case 6:
-
+                        searchCar();
+                        break;
                     case 7:
                         adminView.launch();
                         break;
@@ -63,8 +65,8 @@ public class CarView {
         } while (checkActionMenu);
     }
 
-    public void showCar() {
-        List<Car> cars = carService.getAllCars();
+    public void showCar(List<Car> cars) {
+//        List<Car> cars = carService.getAllCars();
         System.out.println("╔═════════════════════════════════════════════════DANH SÁCH XE═══════════════════════════════════════════════════╗");
         System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Số lượng", "Loại", "Giá", "Tình trạng");
         System.out.println();
@@ -167,7 +169,7 @@ public class CarView {
         boolean checkActionMenu = true;
         do {
             try {
-                showCar();
+                showCar(carService.getAllCars());
                 long id = inputId();
                 Car car = carService.findCarById(id);
                 BannerUtils.menuBanner("CarView-Update");
@@ -302,7 +304,7 @@ public class CarView {
     public void removeCar() {
         boolean isRetry = true;
         do {
-            showCar();
+            showCar(carService.getAllCars());
             long id = inputId();
             boolean checkActionMenu = true;
             do {
@@ -312,7 +314,7 @@ public class CarView {
                     switch (choice) {
                         case "y":
                             carService.removeCarById(id);
-                            System.out.println("Xoá sản phẩm thành công!");
+                            System.out.println("Đã xoá thành công!");
                             checkActionMenu = false;
                             break;
                         case "n":
@@ -338,12 +340,12 @@ public class CarView {
                     case 1:
                         cars.sort(new ComparatorIncreasingByPrice());
                         FileUtils.writeDataToFile(filePath,cars);
-                        showCar();
+                        showCar(carService.getAllCars());
                         break;
                     case 2:
                         cars.sort(new ComparatorDecreasingByPrice());
                         FileUtils.writeDataToFile(filePath,cars);
-                        showCar();
+                        showCar(carService.getAllCars());
                         break;
                     case 3:
                         carView.launch();
@@ -360,13 +362,132 @@ public class CarView {
                 e.printStackTrace();
             }
     }
-    public void searchCar() {
-        int choice;
-        boolean checkActionMenu = true;
-        do {
-            try {
 
-            }
+    public void searchCar(){
+        try {
+            boolean checkActionMenu = false;
+            do {
+                Car car;
+                checkActionMenu = false;
+                BannerUtils.menuBanner("CarView-Search");
+                int choice = Integer.parseInt(scanner.nextLine());
+                switch (choice) {
+                    case 1:
+                        System.out.println("Nhập ID xe: ");
+                        long id = Long.parseLong(scanner.nextLine());
+                        car = carService.findCarById(id);
+                        System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Số lượng", "Loại", "Giá", "Tình trạng");
+                        System.out.println();
+                        System.out.println(car.toData());
+                        break;
+                    case 2:
+                        System.out.println("Nhập tên xe: ");
+                        String name = scanner.nextLine().toUpperCase();
+                        List<Car> cars = carService.findCarByName(name);
+                        showCar(cars);
+                        break;
+                    case 3:
+                        searchCarByType(carService.getAllCars());
+                        break;
+                    case 4:
+                        searchCarByStatus(carService.getAllCars());
+                        break;
+                    case 5:
+                        carView.launch();
+                        break;
+                    case 6:
+                        System.exit(0);
+                }
+            } while (checkActionMenu);
+        }catch (Exception e) {
+            System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");
         }
+    }
+    public void searchCarByType(List<Car> list) {
+        boolean checkActionMenu;
+        do {
+            checkActionMenu = false;
+            try {
+                BannerUtils.menuBanner("CarView-SearchByType");
+                int choice = Integer.parseInt(scanner.nextLine());
+                switch (choice) {
+                    case 1:
+                        List<Car> carList = carService.findCarByType(list, 1);
+                        System.out.println("DANH SÁCH XE 4 CHỖ");
+                        System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Số lượng", "Loại", "Giá", "Tình trạng");
+                        System.out.println();
+                        for(Car car: carList) {
+                            System.out.printf(car.toData()).println();
+                        }
+                        break;
+                    case 2:
+                        List<Car> carList1 = carService.findCarByType(list, 2);
+                        System.out.println("DANH SÁCH XE 4 CHỖ");
+                        System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Số lượng", "Loại", "Giá", "Tình trạng");
+                        System.out.println();
+                        for(Car car: carList1) {
+                            System.out.printf(car.toData()).println();
+                        }
+                        break;
+                    case 3:
+                        List<Car> carList2 = carService.findCarByType(list, 3);
+                        System.out.println("DANH SÁCH XE 4 CHỖ");
+                        System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Số lượng", "Loại", "Giá", "Tình trạng");
+                        System.out.println();
+                        for(Car car: carList2) {
+                            System.out.printf(car.toData()).println();
+                        }
+                        break;
+                    case 4:
+                        searchCar();
+                        break;
+                    case 5:
+                        System.exit(0);
+                    default:
+                        System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");}
+
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");
+            }
+        } while (checkActionMenu);
+    }
+    public void searchCarByStatus(List<Car> list) {
+        boolean checkActionMenu;
+        do {
+            checkActionMenu = false;
+            try {
+                BannerUtils.menuBanner("CarView-SearchByStatus");
+                int choice = Integer.parseInt(scanner.nextLine());
+                switch (choice) {
+                    case 1:
+                        List<Car> carList = carService.findCarByStatus(list, 1);
+                        System.out.println("DANH SÁCH XE CÓ THỂ CHO THUÊ");
+                        System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Số lượng", "Loại", "Giá", "Tình trạng");
+                        System.out.println();
+                        for(Car car: carList) {
+                            System.out.printf(car.toData()).println();
+                        }
+                        break;
+                    case 2:
+                        List<Car> carList1 = carService.findCarByStatus(list, 2);
+                        System.out.println("DANH SÁCH ĐANG ĐƯỢC THUÊ");
+                        System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Số lượng", "Loại", "Giá", "Tình trạng");
+                        System.out.println();
+                        for(Car car: carList1) {
+                            System.out.printf(car.toData()).println();
+                        }
+                        break;
+                    case 3:
+                        searchCar();
+                        break;
+                    case 4:
+                        System.exit(0);
+                    default:
+                        System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");}
+
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");
+            }
+        } while (checkActionMenu);
     }
 }

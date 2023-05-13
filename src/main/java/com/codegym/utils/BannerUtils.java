@@ -75,11 +75,77 @@ public class BannerUtils {
         if (option.equals("CarView-Search")) {
             System.out.println("╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
             System.out.println("                                                TÌM KIẾM SẢN PHẨM                                                     ");
-            System.out.println("                         【1】Tìm kiếm theo ID sản phẩm              【2】Tìm kiếm theo tên                              ");
-            System.out.println("                         【3】Tìm kiếm theo loại xe                  【4】Tìm kiếm theo tình trạng                                                                                   ");
-            System.out.println("                         【3】                                                                                   ");
+            System.out.println("                         【1】Tìm kiếm theo ID sản phẩm          【4】Tìm kiếm theo tình trạng                                  ");
+            System.out.println("                         【2】Tìm kiếm theo tên                  【5】Trở về                                                                                   ");
+            System.out.println("                         【3】Tìm kiếm theo loại xe              【6】Thoát                                                                     ");
             System.out.println("╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
             System.out.println("➔ Chọn chức năng:");
         }
+        if (option.equals("CarView-SearchByType")) {
+            System.out.println("╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println("                                          TÌM KIẾM THEO LOẠI XE                                        ");
+            System.out.println("                                     【1】Tìm kiếm xe 4 chỗ                                     ");
+            System.out.println("                                     【2】Tìm kiếm xe 5 chỗ                                                   ");
+            System.out.println("                                     【3】Tìm kiếm xe 7 chỗ                                                   ");
+            System.out.println("                                     【4】Trở về                                                   ");
+            System.out.println("                                     【0】Thoát                                                   ");
+            System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+            System.out.println("➔ Chọn chức năng:");
+        }
+        if (option.equals("CarView-SearchByStatus")) {
+            System.out.println("╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println("                                     TÌM KIẾM THEO TÌNH TRẠNG XE                                        ");
+            System.out.println("                                     【1】Tìm kiếm xe có thể cho thuê                                     ");
+            System.out.println("                                     【2】Tìm kiếm xe đang được thuê                                                   ");
+            System.out.println("                                     【3】Trở về                                                   ");
+            System.out.println("                                     【0】Thoát                                                   ");
+            System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+            System.out.println("➔ Chọn chức năng:");
+        }
+        if (option.equals("UserManagerView")) {
+            System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+            System.out.println("                          QUẢN LÝ NGƯỜI DÙNG                                ");
+            System.out.println("                    【1】Hiển thị tất cả khách hàng                                        ");
+            System.out.println("                    【2】Thêm khách hàng                                       ");
+            System.out.println("                    【3】Chỉnh sửa thông tin khách hàng                                     ");
+            System.out.println("                    【4】Xoá khách hàng                                       ");
+            System.out.println("                    【5】Trở về                                    ");
+            System.out.println("                    【0】Thoát "                              );
+            System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+            System.out.println("➔ Chọn chức năng:");
+        }
+        if (option.equals("SetRole")) {
+            System.out.println("╔═══════════════════════════════╗");
+            System.out.println("             VAI TRÒ                                ");
+            System.out.println("           【1】ADMIN                                       ");
+            System.out.println("           【2】USER                                       ");
+            System.out.println("╚═══════════════════════════════╝");
+            System.out.println("➔ Chọn chức năng:");
+        }
+        if (option.equals("UpdateUser")) {
+            System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+            System.out.println("                          CHỈNH SỬA THÔNG TIN NGƯỜI DÙNG                                ");
+            System.out.println("                    【1】Chỉnh sửa tên                                        ");
+            System.out.println("                    【2】Chỉnh sửa số căn cước                                       ");
+            System.out.println("                    【3】Chỉnh sửa địa chỉ                                     ");
+            System.out.println("                    【4】Chỉnh sửa số điện thoại                                       ");
+            System.out.println("                    【5】Chỉnh sửa email                                       ");
+            System.out.println("                    【6】Chỉnh sửa vai trò truy cập                                       ");
+            System.out.println("                    【7】Trở về                                    ");
+            System.out.println("                    【0】Thoát "                              );
+            System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+            System.out.println("➔ Chọn chức năng:");
+        }
+        if (option.equals("OrderView")) {
+            System.out.println("╔═══════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println("                                             QUẢN LÝ ĐƠN HÀNG                                            ");
+            System.out.println("                【1】Hiển thị danh sách tất cả đơn hàng           【5】Trở về                           ");
+            System.out.println("                【2】Hiển thị đơn hàng theo tình trạng            【0】Thoát                             ");
+            System.out.println("                【3】Cập nhật đơn hàng                                        ");
+            System.out.println("                【4】Hiển thị doanh thu                                                  ");
+            System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+            System.out.println("➔ Chọn chức năng:");
+        }
+
     }
 }

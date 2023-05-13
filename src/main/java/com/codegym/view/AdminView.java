@@ -9,7 +9,7 @@ public class AdminView {
     CarView carView = new CarView();
     RentalOrderView rentalOrderView = new RentalOrderView();
     UserManagerView userManagerView = new UserManagerView();
-    public  void launch() {
+    public void launch() {
         Scanner scanner = new Scanner(System.in);
         boolean checkActionMenu = true;
         do {

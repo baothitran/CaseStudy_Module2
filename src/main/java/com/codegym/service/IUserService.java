@@ -16,6 +16,7 @@ public interface IUserService {
     List<User> findByName (String name);
     boolean existByUsername(String username);
     boolean existByPhone(String phone);
+    boolean existByIdCardNum(String idcardnum);
     boolean existByEmail(String email);
 
 

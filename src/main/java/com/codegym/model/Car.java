@@ -115,13 +115,9 @@ public class Car implements IModel<Car> {
     }
     @Override
     public String toString() {
-        return
-                id +
-                "," + name+
-                "," + brand+
-                "," + quantity +
-                "," + type.getIdType() +
-                "," + CurrencyUtils.convertPriceToString(rentalPrice) +
-                "," + status.getId();
+        return String.format("%s,%s,%s,%s,%s,%s,%s",id,name,brand,quantity,type.getIdType(),CurrencyUtils.convertPriceToString(rentalPrice),status.getId());
+    }
+    public String toData() {
+        return String.format("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", id, name, brand, quantity, type,CurrencyUtils.convertPriceToString(rentalPrice),status);
     }
 }

@@ -97,7 +97,7 @@ public class CheckUtils {
             case "N":
                 return false;
             default:
-                System.out.println("Lỗi! Vui lòng nhập lại");
+                System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
                 return true;
         }
     }
@@ -110,7 +110,33 @@ public class CheckUtils {
             case "N":
                 return false;
             default:
-                System.out.println("Lỗi! Vui lòng nhập lại");
+                System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
+                return true;
+        }
+    }
+    public static boolean checkContinueAddOrder() {
+        System.out.println("Bạn có muốn tiếp tục thuê thêm không? Y/N");
+        String choiceContinueAction = scanner.nextLine().trim().toUpperCase();
+        switch (choiceContinueAction){
+            case "Y":
+                return true;
+            case "N":
+                return false;
+            default:
+                System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
+                return true;
+        }
+    }
+    public static boolean checkContinueActionShowProfit() {
+        System.out.println("Bạn có muốn tiếp tục xem doanh thu không? Y/N");
+        String choiceContinueAction = scanner.nextLine().trim().toLowerCase();
+        switch (choiceContinueAction) {
+            case "y":
+                return true;
+            case "n":
+                return false;
+            default:
+                System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
                 return true;
         }
     }

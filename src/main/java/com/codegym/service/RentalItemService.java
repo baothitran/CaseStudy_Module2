@@ -10,6 +10,10 @@ import java.util.List;
 public class RentalItemService implements IRentalItemService{
     public final String filePath = "F:\\BaoThi\\CaseStudy_Module2\\src\\main\\java\\com\\codegym\\data\\rentalitem.csv";
     private static RentalItemService instance;
+    FileUtils fileUtils;
+    public RentalItemService() {
+        fileUtils = new FileUtils();
+    }
     public static RentalItemService getInstance() {
         if (instance == null) {
             instance = new RentalItemService();
@@ -34,5 +38,12 @@ public class RentalItemService implements IRentalItemService{
             return null;
         }
         return rentalItemList;
+    }
+
+    @Override
+    public void addRentalItem(List<RentalItem> rentalItems) {
+        List<RentalItem> rentalItemList = getAllRentalItems();
+        rentalItemList.addAll(rentalItems);
+        FileUtils.writeDataToFile(filePath,rentalItemList);
     }
 }

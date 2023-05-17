@@ -32,7 +32,7 @@ public class AdminView {
                     case 4:
                         Launcher.launch();
                         break;
-                    case 5:
+                    case 0:
                         System.exit(0);
                     default:
                         System.out.println("Nhập sai! Vui lòng nhập lại!");
@@ -40,7 +40,6 @@ public class AdminView {
                 }
             } catch (Exception e) {
                 System.out.println("Vui lòng nhập số tương ứng với chức năng đã cho!");
-                e.printStackTrace();
             }
         } while (checkActionMenu);
     }

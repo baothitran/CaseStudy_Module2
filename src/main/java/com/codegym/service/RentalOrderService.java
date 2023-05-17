@@ -1,8 +1,10 @@
 package com.codegym.service;
 
+import com.codegym.model.Car;
 import com.codegym.model.RentalOrder;
 import com.codegym.utils.FileUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RentalOrderService implements IRentalOrderService{
@@ -30,9 +32,32 @@ public class RentalOrderService implements IRentalOrderService{
     }
 
     @Override
-    public void update(RentalOrder newOrder) {
-
+    public List<RentalOrder> findOrderByStatus(List<RentalOrder> rentalOrderList, int idStatus) {
+        List<RentalOrder> rentalOrders = new ArrayList<>();
+        for (RentalOrder rentalOrder : rentalOrderList) {
+            if (rentalOrder.getOrderStatus().getId() == idStatus) {
+                rentalOrders.add(rentalOrder);
+            }
         }
+        return rentalOrders;
+    }
+
+    @Override
+        public boolean existById(long id) {
+            return findById(id) != null;
+        }
+
+    @Override
+    public void updateOrder(RentalOrder rentalOrder, long id) {
+        List<RentalOrder> rentalOrders = getAllOrders();
+        for(RentalOrder rentalOrder1 : rentalOrders) {
+            if (rentalOrder1.getOrderID() == id) {
+                rentalOrder1.updateOrder(rentalOrder);
+                FileUtils.writeDataToFile(filePath, rentalOrders);
+                break;
+            }
+        }
+    }
 
 
 }

@@ -8,7 +8,6 @@ import com.codegym.model.ECarStatus;
 import com.codegym.model.EType;
 import com.codegym.service.CarService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -60,21 +59,20 @@ public class CarView {
                 }
             } catch (Exception e) {
                 System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn!");
-                e.printStackTrace();
             }
         } while (checkActionMenu);
     }
 
     public void showCar(List<Car> cars) {
 //        List<Car> cars = carService.getAllCars();
-        System.out.println("╔═════════════════════════════════════════════════DANH SÁCH XE═══════════════════════════════════════════════════╗");
-        System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Số lượng", "Loại", "Giá", "Tình trạng");
+        System.out.println("╔════════════════════════════════════════════════════DANH SÁCH XE══════════════════════════════════════════════════════╗");
+        System.out.printf("║%10s║ %38s║ %15s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Loại", "Giá", "Tình trạng");
         System.out.println();
         for (Car car : cars) {
-            System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║\n",
-                    car.getId(), car.getName(), car.getBrand(), car.getQuantity(), car.getType(), CurrencyUtils.convertPriceToString(car.getRentalPrice()), car.getStatus());
+            System.out.printf("║%10s║ %38s║ %15s║ %15s║ %15s║ %15s║\n",
+                    car.getId(), car.getName(), car.getBrand(), car.getType(), CurrencyUtils.convertPriceToString(car.getRentalPrice()), car.getStatus());
         }
-        System.out.println("╚════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
     }
 
     public void addCar() {
@@ -88,21 +86,21 @@ public class CarView {
                 car.setName(carName);
                 String brand = inputBrand();
                 car.setBrand(brand);
-                int quantity = inputQuantity();
-                car.setQuantity(quantity);
+//                int quantity = inputQuantity();
+//                car.setQuantity(quantity);
                 System.out.println("ID Loại xe: ");
                 int idType = Integer.parseInt(scanner.nextLine());
                 car.setType(EType.findTypeByID(idType));
                 double price = inputPrice();
                 car.setRentalPrice(price);
-                System.out.print("Tình trạng xe: ");
-                int idCarStatus = Integer.parseInt(scanner.nextLine());
-                car.setStatus(ECarStatus.findCarStatusByID(idCarStatus));
+//                System.out.print("Tình trạng xe: ");
+//                int idCarStatus = Integer.parseInt(scanner.nextLine());
+                car.setStatus(ECarStatus.Unrented);
                 checkAddCarMenu = false;
                 carService.addCar(car);
+                System.out.println("ĐÃ THÊM XE THÀNH CÔNG!");
             } catch (Exception e) {
                 System.out.println("Lỗi! Vui lòng nhập lại!");
-                e.printStackTrace();
                 checkAddCarMenu = true;
             }
         } while (checkAddCarMenu);
@@ -141,26 +139,26 @@ public class CarView {
         return brand;
     }
 
-    private int inputQuantity() {
-        System.out.println("Nhập số lượng xe: ");
-        int quantity;
-        do {
-            quantity = CheckUtils.isIntFormatCheck();
-            if (quantity <= 0 || quantity >= 100)
-                System.out.println("Số lượng xe phải lớn hơn 0 và nhỏ hơn 100 chiếc");
-            System.out.println("Nhập số lượng xe: ");
-        } while (quantity <= 0 || quantity >= 100);
-        return quantity;
-    }
+//    private int inputQuantity() {
+//        System.out.println("Nhập số lượng xe: ");
+//        int quantity;
+//        do {
+//            quantity = CheckUtils.isIntFormatCheck();
+//            if (quantity <= 0 || quantity >= 100)
+//                System.out.println("Số lượng xe phải lớn hơn 0 và nhỏ hơn 100 chiếc");
+//            System.out.println("Nhập số lượng xe: ");
+//        } while (quantity <= 0 || quantity >= 100);
+//        return quantity;
+//    }
 
     private double inputPrice() {
         System.out.println("Nhập giá thuê: ");
         double price;
         do {
             price = CheckUtils.isDoubleFormatCheck();
-            if (price <= 1000000 || price > 20000000)
-                System.out.println("Giá thuê phải lớn hơn 1.000.000 VNĐ và nhỏ hơn 20.000.000 VNĐ");
-        } while (price <= 1000000 || price > 20000000);
+            if (price < 1000000 || price > 20000000)
+                System.out.println("Giá thuê phải từ 1.000.000 VNĐ và nhỏ hơn hoặc bằng 20.000.000 VNĐ");
+        } while (price < 1000000 || price > 20000000);
         return price;
     }
 
@@ -186,23 +184,19 @@ public class CarView {
                         checkActionMenu = CheckUtils.checkContinueUpdateMenu();
                         break;
                     case 3:
-                        int quantity = inputQuantity();
-                        car.setQuantity(quantity);
-                        checkActionMenu = CheckUtils.checkContinueUpdateMenu();
-                        break;
-                    case 4:
                         setEType(car);
                         checkActionMenu = CheckUtils.checkContinueUpdateMenu();
                         break;
-                    case 5:
+                    case 4:
                         double price = inputPrice();
                         car.setRentalPrice(price);
                         checkActionMenu = CheckUtils.checkContinueUpdateMenu();
-                    case 6:
+                        break;
+                    case 5:
                         setECarStatus(car);
                         checkActionMenu = CheckUtils.checkContinueUpdateMenu();
                         break;
-                    case 7:
+                    case 6:
                         launch();
                         break;
                     case 0:
@@ -214,7 +208,6 @@ public class CarView {
                 carService.updateCar(car, id);
             } catch (Exception e) {
                 System.out.println("Vui lòng nhập lại");
-                e.printStackTrace();
             }
         } while (checkActionMenu);
     }
@@ -267,8 +260,7 @@ public class CarView {
                     setEType(car);
             }
         } catch (Exception e) {
-            System.out.println("\t Lựa chọn phải là 1 số ");
-            System.out.println("\t═════════════════════════");
+            System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");
             setEType(car);
         }
     }
@@ -359,7 +351,6 @@ public class CarView {
 
             } catch (Exception e) {
                 System.out.println("Nhập sai! Vui lòng nhập lại!");
-                e.printStackTrace();
             }
     }
 
@@ -376,7 +367,7 @@ public class CarView {
                         System.out.println("Nhập ID xe: ");
                         long id = Long.parseLong(scanner.nextLine());
                         car = carService.findCarById(id);
-                        System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Số lượng", "Loại", "Giá", "Tình trạng");
+                        System.out.printf("║%10s║ %30s║ %15s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Loại", "Giá", "Tình trạng");
                         System.out.println();
                         System.out.println(car.toData());
                         break;
@@ -414,7 +405,7 @@ public class CarView {
                     case 1:
                         List<Car> carList = carService.findCarByType(list, 1);
                         System.out.println("DANH SÁCH XE 4 CHỖ");
-                        System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Số lượng", "Loại", "Giá", "Tình trạng");
+                        System.out.printf("║%10s║ %30s║ %15s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Loại", "Giá", "Tình trạng");
                         System.out.println();
                         for(Car car: carList) {
                             System.out.printf(car.toData()).println();
@@ -423,7 +414,7 @@ public class CarView {
                     case 2:
                         List<Car> carList1 = carService.findCarByType(list, 2);
                         System.out.println("DANH SÁCH XE 4 CHỖ");
-                        System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Số lượng", "Loại", "Giá", "Tình trạng");
+                        System.out.printf("║%10s║ %30s║ %15s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Loại", "Giá", "Tình trạng");
                         System.out.println();
                         for(Car car: carList1) {
                             System.out.printf(car.toData()).println();
@@ -432,7 +423,7 @@ public class CarView {
                     case 3:
                         List<Car> carList2 = carService.findCarByType(list, 3);
                         System.out.println("DANH SÁCH XE 4 CHỖ");
-                        System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Số lượng", "Loại", "Giá", "Tình trạng");
+                        System.out.printf("║%10s║ %30s║ %15s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Loại", "Giá", "Tình trạng");
                         System.out.println();
                         for(Car car: carList2) {
                             System.out.printf(car.toData()).println();
@@ -460,18 +451,18 @@ public class CarView {
                 int choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
-                        List<Car> carList = carService.findCarByStatus(list, 1);
+                        List<Car> carList = carService.findCarByStatus(list, 2);
                         System.out.println("DANH SÁCH XE CÓ THỂ CHO THUÊ");
-                        System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Số lượng", "Loại", "Giá", "Tình trạng");
+                        System.out.printf("║%10s║ %30s║ %15s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Loại", "Giá", "Tình trạng");
                         System.out.println();
                         for(Car car: carList) {
                             System.out.printf(car.toData()).println();
                         }
                         break;
                     case 2:
-                        List<Car> carList1 = carService.findCarByStatus(list, 2);
-                        System.out.println("DANH SÁCH ĐANG ĐƯỢC THUÊ");
-                        System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Số lượng", "Loại", "Giá", "Tình trạng");
+                        List<Car> carList1 = carService.findCarByStatus(list, 1);
+                        System.out.println("DANH SÁCH XE ĐANG ĐƯỢC THUÊ");
+                        System.out.printf("║%10s║ %30s║ %15s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Loại", "Giá", "Tình trạng");
                         System.out.println();
                         for(Car car: carList1) {
                             System.out.printf(car.toData()).println();

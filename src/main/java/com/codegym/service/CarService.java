@@ -33,7 +33,6 @@ public class CarService implements ICarService {
             }
         }
     }
-
     @Override
     public void removeCarById(long id) {
         List<Car> cars = getAllCars();

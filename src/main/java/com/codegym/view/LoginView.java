@@ -58,7 +58,8 @@ public class LoginView {
                 adminView.launch();
             } else {
                 System.out.println("Bạn đang đăng nhập với vai trò USER");
-                UserView.launch();
+                UserView userView = new UserView();
+                userView.launch(user);
             }
         }
     }

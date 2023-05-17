@@ -1,9 +1,11 @@
 package com.codegym.model;
 
 import com.codegym.service.IModel;
+import com.codegym.service.RentalItemService;
 import com.codegym.utils.CurrencyUtils;
 import com.codegym.utils.DateUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,10 +18,27 @@ public class RentalOrder implements IModel<RentalOrder> {
     private Date rentalDate;
     private Date returnDate;
     private EOrderStatus orderStatus;
-    private List<RentalItem> orderItems;
     private double grandTotal;
+    List<RentalItem> rentalItems;
 
-    public RentalOrder() {}
+    public List<RentalItem> getRentalItems() {
+        return rentalItems;
+    }
+
+    public void setRentalItems(List<RentalItem> rentalItems) {
+        this.rentalItems = rentalItems;
+    }
+    public RentalOrder() {
+        rentalItems = new ArrayList<>();
+    }
+    public void addRentalItem(RentalItem rentalItem) {
+        rentalItems.add(rentalItem);
+    }
+
+    public void updateOrder(RentalOrder rentalOrder) {
+        this.setOrderStatus(rentalOrder.getOrderStatus());
+
+    }
 
     public long getOrderID() {
         return orderID;
@@ -85,14 +104,6 @@ public class RentalOrder implements IModel<RentalOrder> {
         this.orderStatus = orderStatus;
     }
 
-    public List<RentalItem> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(List<RentalItem> orderItems) {
-        this.orderItems = orderItems;
-    }
-
     public double getGrandTotal() {
         return grandTotal;
     }
@@ -108,11 +119,13 @@ public class RentalOrder implements IModel<RentalOrder> {
                 "," + userName+
                 "," + address+
                 "," + phone+
-                "," + rentalDate +
-                "," + returnDate +
-                "," + orderStatus +
-                "," + orderItems +
-                "," + grandTotal;
+                "," + DateUtils.convertDateToString(rentalDate) +
+                "," + DateUtils.convertDateToString(returnDate) +
+                "," + orderStatus.getId() +
+                "," + CurrencyUtils.convertPriceToString(grandTotal);
+    }
+    public String toData() {
+        return String.format("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║ %10s║ %10s║",orderID,userID,userName,address,phone,DateUtils.convertDateToString(rentalDate),DateUtils.convertDateToString(returnDate),orderStatus,CurrencyUtils.convertPriceToString(grandTotal));
     }
 
     @Override

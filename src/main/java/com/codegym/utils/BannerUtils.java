@@ -54,10 +54,10 @@ public class BannerUtils {
         if (option.equals("CarView-Update")) {
             System.out.println("╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
             System.out.println("                                                CẬP NHẬT SẢN PHẨM                                                     ");
-            System.out.println("                               【1】Tên xe                          【5】Giá                              ");
-            System.out.println("                               【2】Hãng xe                         【6】Tình trạng xe                                  ");
-            System.out.println("                               【3】Số lượng xe                     【7】Trở về                                  ");
-            System.out.println("                               【4】Loại xe                         【0】Thoát                                  ");
+            System.out.println("                               【1】Tên xe                          【5】Tình trạng xe                              ");
+            System.out.println("                               【2】Hãng xe                         【6】Trở về                                  ");
+            System.out.println("                               【3】Loại xe                         【0】Thoát                                  ");
+            System.out.println("                               【4】Giá                                                           ");
             System.out.println("╚═════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
             System.out.println("➔ Chọn chức năng:");
         }
@@ -139,13 +139,40 @@ public class BannerUtils {
         if (option.equals("OrderView")) {
             System.out.println("╔═══════════════════════════════════════════════════════════════════════════════════════════════════════╗");
             System.out.println("                                             QUẢN LÝ ĐƠN HÀNG                                            ");
-            System.out.println("                【1】Hiển thị danh sách tất cả đơn hàng           【5】Trở về                           ");
-            System.out.println("                【2】Hiển thị đơn hàng theo tình trạng            【0】Thoát                             ");
-            System.out.println("                【3】Cập nhật đơn hàng                                        ");
-            System.out.println("                【4】Hiển thị doanh thu                                                  ");
+            System.out.println("                【1】Hiển thị danh sách tất cả đơn hàng           【5】Trả xe                           ");
+            System.out.println("                【2】Hiển thị đơn hàng theo trạng thái            【6】Hiển thị doanh thu                             ");
+            System.out.println("                【3】Chỉnh sửa trạng thái đơn hàng                【7】Trở về                        ");
+            System.out.println("                【4】Hiển thị chi tiết đơn hàng                   【0】Thoát                 ");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════════════════════════╝");
             System.out.println("➔ Chọn chức năng:");
         }
-
+        if (option.equals("RentalOrderView-SearchByStatus")) {
+            System.out.println("╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println("                                     HIỂN THỊ THEO TÌNH TRẠNG ĐƠN HÀNG                                        ");
+            System.out.println("                                     【1】Hiển thị đơn hàng theo tình trạng đã thanh toán                                     ");
+            System.out.println("                                     【2】Hiển thị đơn hàng theo tình trạng chưa thanh toán                                                   ");
+            System.out.println("                                     【3】Trở về                                                   ");
+            System.out.println("                                     【0】Thoát                                                   ");
+            System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+            System.out.println("➔ Chọn chức năng:");
+        }
+        if (option.equals("SetOrderStatus")) {
+            System.out.println("╔═══════════════════════════════╗");
+            System.out.println("             TRẠNG THÁI                                ");
+            System.out.println("           【1】Paid                                       ");
+            System.out.println("           【2】Unpaid                                       ");
+            System.out.println("╚═══════════════════════════════╝");
+            System.out.println("➔ Chọn chức năng:");
+        }
+        if (option.equals("profitMenu")) {
+            System.out.println("╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println("                                               DOANH THU                                        ");
+            System.out.println("                                     【1】Hiển thị doanh thu theo ngày                                     ");
+            System.out.println("                                     【2】Hiển thị doanh thu theo tháng                                                   ");
+            System.out.println("                                     【3】Trở về                                                   ");
+            System.out.println("                                     【0】Thoát                                                   ");
+            System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+            System.out.println("➔ Chọn chức năng:");
+        }
     }
 }

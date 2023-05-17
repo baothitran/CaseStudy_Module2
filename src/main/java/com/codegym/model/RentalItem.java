@@ -1,9 +1,11 @@
 package com.codegym.model;
 
+import com.codegym.service.CarService;
 import com.codegym.service.IModel;
 import com.codegym.utils.CurrencyUtils;
 
 public class RentalItem implements IModel<RentalItem> {
+    CarService carService = new CarService();
     private long id;
     private long carID;
     private long orderID;
@@ -13,11 +15,11 @@ public class RentalItem implements IModel<RentalItem> {
     public RentalItem() {
     }
 
-    public RentalItem(long id, long carID, long orderID, int quantity, double price) {
+    public RentalItem(long id, long carID, long orderID, double price) {
         this.id = id;
         this.carID = carID;
         this.orderID = orderID;
-        this.quantity = quantity;
+//        this.quantity = quantity;
         this.price = price;
     }
 
@@ -63,13 +65,16 @@ public class RentalItem implements IModel<RentalItem> {
 
     @Override
     public String toString() {
-        return "OrderItem{" +
-                "id=" + id +
-                ", carID=" + carID +
-                ", orderID=" + orderID +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                '}';
+//        Car car = carService.findCarById(this.carID);
+        return String.format("%s,%s,%s,%s",
+                id,
+                carID,
+                orderID,
+                CurrencyUtils.convertPriceToString(price));
+    }
+    public String toData() {
+        Car car = carService.findCarById(this.carID);
+        return String.format("%s,%s,%s,%s",id, orderID,car.getName(),CurrencyUtils.convertPriceToString(price));
     }
 
     @Override
@@ -79,8 +84,8 @@ public class RentalItem implements IModel<RentalItem> {
         long id = Long.parseLong(strings[0]);
         long carID = Long.parseLong(strings[1]);
         long orderID = Long.parseLong(strings[2]);
-        int quantity = Integer.parseInt(strings[3]);
-        double price = CurrencyUtils.parseDouble(strings[4]);
+//        int quantity = Integer.parseInt(strings[3]);
+        double price = CurrencyUtils.parseDouble(strings[3]);
         orderItem.setId(id);
         orderItem.setCarID(carID);
         orderItem.setOrderID(orderID);

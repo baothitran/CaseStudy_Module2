@@ -16,11 +16,11 @@ public class Car implements IModel<Car> {
     public Car() {
     }
 
-    public Car(long id, String name, String brand,int quantity, EType type, double rentalPrice, ECarStatus status) {
+    public Car(long id, String name, String brand, EType type, double rentalPrice, ECarStatus status) {
         this.id = id;
         this.name = name;
         this.brand = brand;
-        this.quantity = quantity;
+//        this.quantity = quantity;
         this.type = type;
         this.rentalPrice = rentalPrice;
         this.status = status;
@@ -86,7 +86,7 @@ public class Car implements IModel<Car> {
         this.setId(car.getId());
         this.setName(car.getName());
         this.setBrand(car.getBrand());
-        this.setQuantity(car.getQuantity());
+//        this.setQuantity(car.getQuantity());
         this.setType(car.getType());
         this.setRentalPrice(car.getRentalPrice());
         this.setStatus(car.getStatus());
@@ -95,29 +95,27 @@ public class Car implements IModel<Car> {
     public Car parseData(String line) {
         Car car = new Car();
         String[] strings = line.split(",");
-        int id = Integer.parseInt(strings[0]);
+        long id = Long.parseLong(strings[0]);
         String name = strings[1];
         String brand = strings[2];
-        int quantity = Integer.parseInt(strings[3]);
-        int idType = Integer.parseInt(strings[4]);
-        double rentalPrice = CurrencyUtils.parseDouble(strings[5]);
-        int idCarStatus = Integer.parseInt(strings[6]);
+        int idType = Integer.parseInt(strings[3]);
+        double rentalPrice = CurrencyUtils.parseDouble(strings[4]);
+        int idCarStatus = Integer.parseInt(strings[5]);
         EType type = EType.findTypeByID(idType);
         ECarStatus carStatus = ECarStatus.findCarStatusByID(idCarStatus);
         car.setRentalPrice(rentalPrice);
         car.setId(id);
         car.setBrand(brand);
         car.setName(name);
-        car.setQuantity(quantity);
         car.setType(type);
         car.setStatus(carStatus);
         return car;
     }
     @Override
     public String toString() {
-        return String.format("%s,%s,%s,%s,%s,%s,%s",id,name,brand,quantity,type.getIdType(),CurrencyUtils.convertPriceToString(rentalPrice),status.getId());
+        return String.format("%s,%s,%s,%s,%s,%s",id,name,brand,type.getIdType(),CurrencyUtils.convertPriceToString(rentalPrice),status.getId());
     }
     public String toData() {
-        return String.format("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║", id, name, brand, quantity, type,CurrencyUtils.convertPriceToString(rentalPrice),status);
+        return String.format("║%10s║ %30s║ %15s║ %15s║ %15s║ %15s║", id, name, brand,type,CurrencyUtils.convertPriceToString(rentalPrice),status);
     }
 }

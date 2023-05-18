@@ -26,6 +26,9 @@ public class LoginView {
                     case 1:
                         loginProgram(role);
                         break;
+                    case 2:
+                        Launcher.launch();
+                        break;
                     case 0:
                         System.exit(0);
                     default:

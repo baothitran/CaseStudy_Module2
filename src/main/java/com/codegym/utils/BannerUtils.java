@@ -5,6 +5,7 @@ public class BannerUtils {
         if (option.equals("LoginView")) {
             System.out.println("╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗");
             System.out.println("                                         【1】Đăng nhập                                     ");
+            System.out.println("                                         【2】Trở về                                     ");
             System.out.println("                                         【0】Thoát                                                   ");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝");
             System.out.println("➔ Chọn chức năng:");

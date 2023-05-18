@@ -4,11 +4,11 @@ import java.text.Normalizer;
 import java.util.regex.Pattern;
 
 public class ValidateUtils {
-    public static final String NAME_REGEX = "^([A-ZÀ-ỹ][a-zÀ-ỹ]*[ ]?){2,}$";
+    public static final String NAME_REGEX = "^([A-ZÀ-ỹ][a-zÀ-ỹ]*[ ]?){1,}$";
     //Không bao gồm chữ số
-    public static final String PHONE_REGEX = "[0][1-9][0-9]{8,9}$";
+    public static final String PHONE_REGEX = "[0][1-9][0-9]{8}$";
     public static final String USERNAME_REGEX = "^[a-z0-9_-]{3,16}$";
-    public static final String PASS_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,}$";
+    public static final String PASS_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%+*/?&])[A-Za-z\\d@$!%*+/?&]{6,}$";
     //Tối thiểu sáu ký tự, ít nhất một chữ cái viết hoa, một chữ cái viết thường, một chữ số và một ký tự đặc biệt
     public static final String EMAIL_REGEX = "^[_a-z0-9-\\+]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*(\\.[a-z]{2,})$";
     public static final String IDCARDNUM_REGEX = "^0\\d{11}$";

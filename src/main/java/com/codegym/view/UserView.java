@@ -58,8 +58,6 @@ public class UserView {
                 e.printStackTrace();
             }
         }while (checkActionMenu);
-
     }
-
     }
 

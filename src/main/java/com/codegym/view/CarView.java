@@ -86,15 +86,25 @@ public class CarView {
                 car.setName(carName);
                 String brand = inputBrand();
                 car.setBrand(brand);
-//                int quantity = inputQuantity();
-//                car.setQuantity(quantity);
-                System.out.println("ID Loại xe: ");
-                int idType = Integer.parseInt(scanner.nextLine());
+//                System.out.println("ID Loại xe: ");
+//                int idType = Integer.parseInt(scanner.nextLine());
+                int idType;
+                do {
+                    System.out.println("╔═══════════════════════════════╗");
+                    System.out.println("             LOẠI XE                               ");
+                    System.out.println("           【1】Xe 4 chỗ                                       ");
+                    System.out.println("           【2】Xe 5 chỗ                                       ");
+                    System.out.println("           【3】Xe 7 chỗ                                       ");
+                    System.out.println("╚═══════════════════════════════╝");
+                    System.out.println("Loại xe: ");
+                    idType = Integer.parseInt(scanner.nextLine());
+                    if (idType < 1 || idType > 3) {
+                        System.out.println("Giá trị không hợp lệ! Vui lòng nhập lại.");
+                    }
+                } while (idType < 1 || idType > 3);
                 car.setType(EType.findTypeByID(idType));
                 double price = inputPrice();
                 car.setRentalPrice(price);
-//                System.out.print("Tình trạng xe: ");
-//                int idCarStatus = Integer.parseInt(scanner.nextLine());
                 car.setStatus(ECarStatus.Unrented);
                 checkAddCarMenu = false;
                 carService.addCar(car);
@@ -212,26 +222,26 @@ public class CarView {
         } while (checkActionMenu);
     }
 
-        private long inputId() {
-            long id = 0;
-            boolean checkActionMenu = true;
-            do {
-                System.out.println("Nhập ID: ");
-                try {
-                    id = CheckUtils.isLongFormatCheck();
-                    boolean isId = carService.existById(id);
-                    if (isId) {
-                        checkActionMenu = false;
-                    } else {
-                        System.out.println("Không tìm thấy xe! Vui lòng nhập đúng ID!");
-                    }
-                } catch (Exception e) {
-                    System.out.println("Vui lòng nhập vào ID tương ứng và không để trống!");
+    private long inputId() {
+        long id = 0;
+        boolean checkActionMenu = true;
+        do {
+            System.out.println("Nhập ID: ");
+            try {
+                id = CheckUtils.isLongFormatCheck();
+                boolean isId = carService.existById(id);
+                if (isId) {
+                    checkActionMenu = false;
+                } else {
+                    System.out.println("Không tìm thấy xe! Vui lòng nhập đúng ID!");
                 }
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập vào ID tương ứng và không để trống!");
+            }
 
-            } while (checkActionMenu);
-            return id;
-        }
+        } while (checkActionMenu);
+        return id;
+    }
 
     public void setEType(Car car) {
         System.out.println("╔═══════SET TYPE════════╗");
@@ -293,6 +303,7 @@ public class CarView {
             setEType(car);
         }
     }
+
     public void removeCar() {
         boolean isRetry = true;
         do {
@@ -320,41 +331,42 @@ public class CarView {
                     System.out.println("Nhập sai! Xin mời nhập lại!");
                 }
             } while (checkActionMenu);
-        }while (isRetry == CheckUtils.checkContinueRemoveAction());
+        } while (isRetry == CheckUtils.checkContinueRemoveAction());
     }
+
     public void sortCar() {
         BannerUtils.menuBanner("CarView-Sort");
         int choice;
-            try {
-                List<Car> cars = carService.getAllCars();
-                choice = Integer.parseInt(scanner.nextLine());
-                switch (choice) {
-                    case 1:
-                        cars.sort(new ComparatorIncreasingByPrice());
-                        FileUtils.writeDataToFile(filePath,cars);
-                        showCar(carService.getAllCars());
-                        break;
-                    case 2:
-                        cars.sort(new ComparatorDecreasingByPrice());
-                        FileUtils.writeDataToFile(filePath,cars);
-                        showCar(carService.getAllCars());
-                        break;
-                    case 3:
-                        carView.launch();
-                        break;
-                    case 4:
-                        System.exit(0);
-                    default:
-                        System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn!");
-                        break;
-                }
-
-            } catch (Exception e) {
-                System.out.println("Nhập sai! Vui lòng nhập lại!");
+        try {
+            List<Car> cars = carService.getAllCars();
+            choice = Integer.parseInt(scanner.nextLine());
+            switch (choice) {
+                case 1:
+                    cars.sort(new ComparatorIncreasingByPrice());
+                    FileUtils.writeDataToFile(filePath, cars);
+                    showCar(carService.getAllCars());
+                    break;
+                case 2:
+                    cars.sort(new ComparatorDecreasingByPrice());
+                    FileUtils.writeDataToFile(filePath, cars);
+                    showCar(carService.getAllCars());
+                    break;
+                case 3:
+                    carView.launch();
+                    break;
+                case 4:
+                    System.exit(0);
+                default:
+                    System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn!");
+                    break;
             }
+
+        } catch (Exception e) {
+            System.out.println("Nhập sai! Vui lòng nhập lại!");
+        }
     }
 
-    public void searchCar(){
+    public void searchCar() {
         try {
             boolean checkActionMenu = false;
             do {
@@ -390,10 +402,11 @@ public class CarView {
                         System.exit(0);
                 }
             } while (checkActionMenu);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");
         }
     }
+
     public void searchCarByType(List<Car> list) {
         boolean checkActionMenu;
         do {
@@ -407,7 +420,7 @@ public class CarView {
                         System.out.println("DANH SÁCH XE 4 CHỖ");
                         System.out.printf("║%10s║ %30s║ %15s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Loại", "Giá", "Tình trạng");
                         System.out.println();
-                        for(Car car: carList) {
+                        for (Car car : carList) {
                             System.out.printf(car.toData()).println();
                         }
                         break;
@@ -416,7 +429,7 @@ public class CarView {
                         System.out.println("DANH SÁCH XE 4 CHỖ");
                         System.out.printf("║%10s║ %30s║ %15s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Loại", "Giá", "Tình trạng");
                         System.out.println();
-                        for(Car car: carList1) {
+                        for (Car car : carList1) {
                             System.out.printf(car.toData()).println();
                         }
                         break;
@@ -425,7 +438,7 @@ public class CarView {
                         System.out.println("DANH SÁCH XE 4 CHỖ");
                         System.out.printf("║%10s║ %30s║ %15s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Loại", "Giá", "Tình trạng");
                         System.out.println();
-                        for(Car car: carList2) {
+                        for (Car car : carList2) {
                             System.out.printf(car.toData()).println();
                         }
                         break;
@@ -435,13 +448,15 @@ public class CarView {
                     case 5:
                         System.exit(0);
                     default:
-                        System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");}
+                        System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");
+                }
 
             } catch (Exception e) {
                 System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");
             }
         } while (checkActionMenu);
     }
+
     public void searchCarByStatus(List<Car> list) {
         boolean checkActionMenu;
         do {
@@ -455,7 +470,7 @@ public class CarView {
                         System.out.println("DANH SÁCH XE CÓ THỂ CHO THUÊ");
                         System.out.printf("║%10s║ %30s║ %15s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Loại", "Giá", "Tình trạng");
                         System.out.println();
-                        for(Car car: carList) {
+                        for (Car car : carList) {
                             System.out.printf(car.toData()).println();
                         }
                         break;
@@ -464,7 +479,7 @@ public class CarView {
                         System.out.println("DANH SÁCH XE ĐANG ĐƯỢC THUÊ");
                         System.out.printf("║%10s║ %30s║ %15s║ %15s║ %15s║ %15s║", "ID", "Tên xe", "Hãng", "Loại", "Giá", "Tình trạng");
                         System.out.println();
-                        for(Car car: carList1) {
+                        for (Car car : carList1) {
                             System.out.printf(car.toData()).println();
                         }
                         break;
@@ -474,7 +489,8 @@ public class CarView {
                     case 4:
                         System.exit(0);
                     default:
-                        System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");}
+                        System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");
+                }
 
             } catch (Exception e) {
                 System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");

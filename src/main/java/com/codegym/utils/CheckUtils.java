@@ -89,7 +89,7 @@ public class CheckUtils {
         }
     }
     public static boolean checkContinueAddAction() {
-        System.out.println("Bạn có muốn tiếp tục thêm sản phẩm không? Y/N");
+        System.out.println("Bạn có muốn tiếp tục thêm không? Y/N");
         String choiceContinueAction = scanner.nextLine().trim().toUpperCase();;
         switch (choiceContinueAction){
             case "Y":
@@ -135,6 +135,19 @@ public class CheckUtils {
                 return true;
             case "n":
                 return false;
+            default:
+                System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
+                return true;
+        }
+    }
+    public static boolean checkActionConfirmReturn() {
+        System.out.println("Bạn có muốn xác nhận thanh toán không? Y/N");
+        String choiceContinueAction = scanner.next().trim().toLowerCase();
+        switch (choiceContinueAction) {
+            case "y":
+                return false;
+            case "n":
+                return true;
             default:
                 System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
                 return true;

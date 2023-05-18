@@ -13,13 +13,13 @@ import java.util.Scanner;
 public class UserManagerView {
     public UserService userService;
     public Scanner scanner = new Scanner(System.in);
-    public AdminView adminView;
 
     public UserManagerView() {
         userService = new UserService();
     }
 
     public void launch() {
+        AdminView adminView = new AdminView();
         boolean checkActionMenu = true;
         do {
             BannerUtils.menuBanner("UserManagerView");
@@ -122,7 +122,7 @@ public class UserManagerView {
         String idcardnum;
         do {
             if (!ValidateUtils.isIdCardNumValid(idcardnum = CheckUtils.isEmpty())) {
-                System.out.println("Yêu cầu bao gồm 12 chữ số!");
+                System.out.println("Yêu cầu bao gồm 12 chữ số và bắt đầu bằng chữ số 0!");
                 continue;
             }
             if (userService.existByIdCardNum(idcardnum)) {
@@ -179,7 +179,7 @@ public class UserManagerView {
                 continue;
             }
             if (userService.existByEmail(email)) {
-                System.out.println("Số điện thoại đã tồn tại. Vui lòng nhập lại!");
+                System.out.println("Email đã tồn tại. Vui lòng nhập lại!");
                 continue;
             }
             break;

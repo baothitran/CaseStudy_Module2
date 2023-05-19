@@ -142,8 +142,8 @@ public class BannerUtils {
             System.out.println("                                             QUẢN LÝ ĐƠN HÀNG                                            ");
             System.out.println("                【1】Hiển thị danh sách tất cả đơn hàng           【5】Trả xe                           ");
             System.out.println("                【2】Hiển thị đơn hàng theo trạng thái            【6】Hiển thị doanh thu                             ");
-            System.out.println("                【3】Chỉnh sửa trạng thái đơn hàng                【7】Trở về                        ");
-            System.out.println("                【4】Hiển thị chi tiết đơn hàng                   【0】Thoát                 ");
+            System.out.println("                【3】Hiển thị chi tiết đơn hàng                   【7】Trở về                        ");
+            System.out.println("                【4】Tạo đơn hàng                                 【0】Thoát                 ");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════════════════════════╝");
             System.out.println("➔ Chọn chức năng:");
         }

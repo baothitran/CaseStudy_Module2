@@ -58,7 +58,7 @@ public class LoginView {
             if (role == ERole.ADMIN) {
                 System.out.println("Bạn đang đăng nhập với vai trò ADMIN");
                 AdminView adminView = new AdminView();
-                adminView.launch();
+                adminView.launch(user);
             } else {
                 System.out.println("Bạn đang đăng nhập với vai trò USER");
                 UserView userView = new UserView();

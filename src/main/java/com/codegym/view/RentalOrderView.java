@@ -37,7 +37,7 @@ public class RentalOrderView {
         userService = new UserService();
     }
 
-    public void launch() {
+    public void launch(User user) {
         AdminView adminView = new AdminView();
         boolean checkActionMenu = true;
         do {
@@ -54,12 +54,6 @@ public class RentalOrderView {
                     case 3:
                         showDetailOrderView();
                         break;
-//                        showOrders(rentalOrderService.getAllOrders());
-//                        long id = inputId();
-//                        RentalOrder rentalOrder = rentalOrderService.findById(id);
-//                        setEOrderStatus(rentalOrder);
-//                        rentalOrderService.updateOrder(rentalOrder, id);
-//                        break;
                     case 4:
                         createOrder(user);
                         break;
@@ -70,7 +64,7 @@ public class RentalOrderView {
                         getTotalProfit(rentalOrderService.getAllOrders());
                         break;
                     case 7:
-                        adminView.launch();
+                        adminView.launch(user);
                         break;
                     case 0:
                         System.exit(0);
@@ -78,6 +72,8 @@ public class RentalOrderView {
                         System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn!");
                         break;
                 }
+            }catch (NumberFormatException e) {
+                System.out.println("Vui lòng chỉ nhập số! ");
             } catch (Exception e) {
                 System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống! ");
             }
@@ -106,29 +102,32 @@ public class RentalOrderView {
                 switch (choice) {
                     case 1:
                         List<RentalOrder> rentalOrderList = rentalOrderService.findOrderByStatus(list, 1);
-                        System.out.println("DANH SÁCH ĐƠN HÀNG ĐÃ ĐƯỢC THANH TOÁN");
-                        System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║ %10s║ %10s║", "ID Order", "ID User", "Username", "Địa chỉ", "Số điện thoại", "Ngày thuê", "Ngày trả", "Tình trạng", "Tổng tiền");
+                        System.out.println("╔══════════════════════════════════════════════════════DANH SÁCH ĐƠN HÀNG ĐÃ ĐƯỢC THANH TOÁN═══════════════════════════════════════════════════╗");
+                        System.out.printf("║%15s║ %15s║ %15s║ %10s║ %15s║ %15s║ %15s║ %10s║ %16s║", "ID Order", "ID User", "Username", "Địa chỉ", "Số điện thoại", "Ngày thuê", "Ngày trả", "Tình trạng", "Tổng tiền");
                         System.out.println();
                         for (RentalOrder rentalOrder : rentalOrderList) {
                             System.out.printf(rentalOrder.toData()).println();
                         }
+                        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
                         break;
                     case 2:
                         List<RentalOrder> rentalOrderList1 = rentalOrderService.findOrderByStatus(list, 2);
-                        System.out.println("DANH SÁCH ĐƠN HÀNG CHƯA ĐƯỢC THANH TOÁN");
-                        System.out.printf("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║ %10s║ %10s║", "ID Order", "ID User", "Username", "Địa chỉ", "Số điện thoại", "Ngày thuê", "Ngày trả", "Tình trạng", "Tổng tiền");
+                        System.out.println("╔════════════════════════════════════════════════════DANH SÁCH ĐƠN HÀNG CHƯA ĐƯỢC THANH TOÁN═══════════════════════════════════════════════════╗");
+                        System.out.printf("║%15s║ %15s║ %15s║ %10s║ %15s║ %15s║ %15s║ %10s║ %16s║", "ID Order", "ID User", "Username", "Địa chỉ", "Số điện thoại", "Ngày thuê", "Ngày trả", "Tình trạng", "Tổng tiền");
                         System.out.println();
                         for (RentalOrder rentalOrder : rentalOrderList1) {
                             System.out.printf(rentalOrder.toData()).println();
                         }
+                        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
                         break;
                     case 3:
-                        launch();
+                        launch(user);
                         break;
-                    case 4:
+                    case 0:
                         System.exit(0);
                     default:
                         System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");
+                        break;
                 }
 
             } catch (Exception e) {
@@ -392,13 +391,25 @@ public class RentalOrderView {
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
-                    System.out.println("Nhập ngày bạn muốn xem (dd-mm-yyyy):");
                     double total1 = 0;
-                    String day = scanner.nextLine();
+                    String date = null;
+                    boolean checkDate = false;
+                    do {
+                        System.out.println("Nhập ngày tháng năm bạn muốn xem doanh thu: dd-MM-yyyy");
+                        date = scanner.nextLine();
+                        if (date.equals("0")) {
+                            checkDate = true;
+                            getTotalProfit(orderList);
+                        }
+                        checkDate = ValidateUtils.isDay(date);
+                        if (!checkDate) {
+                            System.out.println("Ngày tháng năm bạn nhập không hợp lệ, vui lòng nhập lại: dd-MM-yyyy");
+                        }
+                    } while (!checkDate);
+
                     List<RentalOrder> orderList1 = new ArrayList<>();
                     for (RentalOrder rentalOrder1 : paidOrderList) {
-                        if (getDataByDate(DateUtils.convertDateToString(rentalOrder1.getReturnDate())).equals(day)) {
-//                            total1 += getTotal(rentalOrder1);
+                        if (getDataByDate(DateUtils.convertDateToString(rentalOrder1.getReturnDate())).equals(date)) {
                             total1 += rentalOrder1.getGrandTotal();
                             orderList1.add(rentalOrder1);
                         }
@@ -408,9 +419,22 @@ public class RentalOrderView {
                     check = CheckUtils.checkContinueActionShowProfit();
                     break;
                 case "2":
-                    System.out.println("Nhập tháng bạn muốn xem:");
                     double total = 0;
-                    String month = scanner.nextLine();
+                    String month = null;
+                    boolean checkMonth = false;
+                    do {
+                        System.out.println("Nhập tháng năm bạn muốn xem doanh thu: MM-yyyy");
+                        month = scanner.nextLine();
+                        if (month.equals("0")) {
+                            checkMonth = true;
+                            getTotalProfit(orderList);
+                        }
+                        checkMonth = ValidateUtils.isMonth(month);
+                        if (!checkMonth) {
+                            System.out.println("Tháng năm bạn nhập không hợp lệ, vui lòng nhập lại: MM-yyyy");
+                        }
+                    } while (!checkMonth);
+
                     List<RentalOrder> orderList2 = new ArrayList<>();
                     for (RentalOrder rentalOrder1 : paidOrderList) {
                         if (getDataByMonth(DateUtils.convertDateToString(rentalOrder1.getReturnDate())).contains(month)) {
@@ -423,7 +447,7 @@ public class RentalOrderView {
                     check = CheckUtils.checkContinueActionShowProfit();
                     break;
                 case "3":
-                    launch();
+                    launch(user);
                     break;
                 default:
                     System.out.println("Lỗi! Vui lòng nhập lại");
@@ -446,7 +470,7 @@ public class RentalOrderView {
                 if (order.getOrderID() == id) {
                     if (order.getOrderStatus() == EOrderStatus.Paid) {
                         System.out.println("Hoá đơn này đã được thanh toán trước đó!");
-                        launch();
+                        launch(user);
                     }
                     long diffInMillies = Math.abs(returnDay.getTime() - order.getReturnDate().getTime());
                     int daysDiff = (int) Math.ceil((diffInMillies / (1000 * 60 * 60 * 24)));
@@ -467,10 +491,12 @@ public class RentalOrderView {
                          System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝");
                          order.setGrandTotal(order.getGrandTotal() + expireFee);
                          check = CheckUtils.checkActionConfirmReturn();
+                         System.out.println("ĐÃ TRẢ XE THÀNH CÔNG!");
                      }
                      if (order.getReturnDate().getTime() == returnDay.getTime() || order.getReturnDate().getTime() > returnDay.getTime()) {
                          System.out.printf("Tổng tiền còn lại cần phải thanh toán: %s", CurrencyUtils.convertPriceToString(order.getGrandTotal() - depositFee)).println();
                          check = CheckUtils.checkActionConfirmReturn();
+                         System.out.println("ĐÃ TRẢ XE THÀNH CÔNG!");
                      }
                      order.setOrderStatus(EOrderStatus.Paid);
                      FileUtils.writeDataToFile(rentalOrderService.filePath, rentalOrders);

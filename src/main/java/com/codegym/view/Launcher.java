@@ -24,7 +24,7 @@ public class Launcher {
                     case 2:
                         Launcher.mainLaucher(ERole.USER);
                         break;
-                    case 3:
+                    case 0:
                         System.exit(0);
                     default:
                         System.out.println("Nhập sai! Vui lòng nhập lại!");

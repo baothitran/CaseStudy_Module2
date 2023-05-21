@@ -10,6 +10,8 @@ import com.codegym.utils.ValidateUtils;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.codegym.view.LoginView.user;
+
 public class UserManagerView {
     public UserService userService;
     public Scanner scanner = new Scanner(System.in);
@@ -18,7 +20,7 @@ public class UserManagerView {
         userService = new UserService();
     }
 
-    public void launch() {
+    public void launch(User user) {
         AdminView adminView = new AdminView();
         boolean checkActionMenu = true;
         do {
@@ -33,12 +35,12 @@ public class UserManagerView {
                         addUser();
                         break;
                     case 3:
-                        updateUser();
+                        updateUser(user);
                         break;
                     case 4:
                         removeUser();
                     case 5:
-                        adminView.launch();
+                        adminView.launch(user);
                         break;
                     case 0:
                         System.exit(0);
@@ -96,7 +98,7 @@ public class UserManagerView {
         String username;
         do {
             if (!ValidateUtils.isUsernameValid(username = CheckUtils.isEmpty())) {
-                System.out.println(username + " không đúng định dạng. Vui lòng nhập lại!");
+                System.out.println(username + " không đúng định dạng. Yêu cầu tối thiểu ba ký tự và không bao gồm chữ viết hoa!");
                 continue;
             }
             if (userService.existByUsername(username)) {
@@ -211,7 +213,7 @@ public class UserManagerView {
             }
         } while (isTrue);
     }
-    public void updateUser() {
+    public void updateUser(User user) {
         int choice;
         boolean checkActionMenu = true;
         do {
@@ -252,7 +254,7 @@ public class UserManagerView {
                         userService.updateUser(newUser);
                         break;
                     case 7:
-                        launch();
+                        launch(user);
                         break;
                     case 0:
                         System.exit(0);

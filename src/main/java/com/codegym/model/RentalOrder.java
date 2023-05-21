@@ -125,7 +125,7 @@ public class RentalOrder implements IModel<RentalOrder> {
                 "," + CurrencyUtils.convertPriceToString(grandTotal);
     }
     public String toData() {
-        return String.format("║%10s║ %20s║ %15s║ %10s║ %15s║ %15s║ %15s║ %10s║ %10s║",orderID,userID,userName,address,phone,DateUtils.convertDateToString(rentalDate),DateUtils.convertDateToString(returnDate),orderStatus,CurrencyUtils.convertPriceToString(grandTotal));
+        return String.format("║%15s║ %15s║ %15s║ %10s║ %15s║ %15s║ %15s║ %10s║ %16s║",orderID,userID,userName,address,phone,DateUtils.convertDateToString(rentalDate),DateUtils.convertDateToString(returnDate),orderStatus,CurrencyUtils.convertPriceToString(grandTotal));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.codegym.view;
 
+import com.codegym.model.User;
 import com.codegym.utils.BannerUtils;
 import com.codegym.utils.CheckUtils;
 
@@ -9,7 +10,7 @@ public class AdminView {
     CarView carView = new CarView();
     RentalOrderView rentalOrderView = new RentalOrderView();
     UserManagerView userManagerView = new UserManagerView();
-    public void launch() {
+    public void launch(User user) {
         Scanner scanner = new Scanner(System.in);
         boolean checkActionMenu = true;
         do {
@@ -18,15 +19,15 @@ public class AdminView {
                 int choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
-                        carView.launch();
+                        carView.launch(user);
                         checkActionMenu = CheckUtils.checkContinueActionMenu();
                         break;
                     case 2:
-                        rentalOrderView.launch();
+                        rentalOrderView.launch(user);
                         checkActionMenu = CheckUtils.checkContinueActionMenu();
                         break;
                     case 3:
-                        userManagerView.launch();
+                        userManagerView.launch(user);
                         checkActionMenu = CheckUtils.checkContinueActionMenu();
                         break;
                     case 4:

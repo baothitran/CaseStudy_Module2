@@ -5,7 +5,9 @@ import java.util.regex.Pattern;
 
 public class ValidateUtils {
     public static final String NAME_REGEX = "^([A-ZÀ-ỹ][a-zÀ-ỹ]*[ ]?){1,}$";
-    //Không bao gồm chữ số
+    public static final String CARNAME_REGEX = "^([A-ZÀ-Ỹ0-9]*[ ]?){1,}$";
+
+    public static final String BRANDNAME_REGEX = "^([A-ZÀ-Ỹ]*[ ]?){1,}$";
     public static final String PHONE_REGEX = "[0][1-9][0-9]{8}$";
     public static final String USERNAME_REGEX = "^[a-z0-9_-]{3,16}$";
     public static final String PASS_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%+*/?&])[A-Za-z\\d@$!%*+/?&]{6,}$";
@@ -16,6 +18,12 @@ public class ValidateUtils {
 
     public static boolean isNameValid(String name) {
         return Pattern.compile(NAME_REGEX).matcher(name).matches();
+    }
+    public static boolean isCarNameValid(String name) {
+        return Pattern.compile(CARNAME_REGEX).matcher(name).matches();
+    }
+    public static boolean isBrandNameValid(String name) {
+        return Pattern.compile(BRANDNAME_REGEX).matcher(name).matches();
     }
 
     public static boolean isPhoneValid(String phone) {

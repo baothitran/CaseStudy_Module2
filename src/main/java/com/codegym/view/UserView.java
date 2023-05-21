@@ -38,11 +38,11 @@ public class UserView {
                         launch(user);
                         break;
                     case 3:
-                        carView.sortCar();
+                        carView.sortCar(user);
                         launch(user);
                         break;
                     case 4:
-                        carView.searchCar();
+                        carView.searchCar(user);
                         launch(user);
                         break;
                     case 5:

@@ -20,7 +20,6 @@ public class Car implements IModel<Car> {
         this.id = id;
         this.name = name;
         this.brand = brand;
-//        this.quantity = quantity;
         this.type = type;
         this.rentalPrice = rentalPrice;
         this.status = status;
@@ -86,7 +85,6 @@ public class Car implements IModel<Car> {
         this.setId(car.getId());
         this.setName(car.getName());
         this.setBrand(car.getBrand());
-//        this.setQuantity(car.getQuantity());
         this.setType(car.getType());
         this.setRentalPrice(car.getRentalPrice());
         this.setStatus(car.getStatus());
@@ -116,6 +114,6 @@ public class Car implements IModel<Car> {
         return String.format("%s,%s,%s,%s,%s,%s",id,name,brand,type.getIdType(),CurrencyUtils.convertPriceToString(rentalPrice),status.getId());
     }
     public String toData() {
-        return String.format("║%10s║ %30s║ %15s║ %15s║ %15s║ %15s║", id, name, brand,type,CurrencyUtils.convertPriceToString(rentalPrice),status);
+        return String.format("║%10s║ %38s║ %15s║ %15s║ %15s║ %15s║", id, name, brand,type,CurrencyUtils.convertPriceToString(rentalPrice),status);
     }
 }

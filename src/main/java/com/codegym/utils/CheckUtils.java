@@ -49,108 +49,141 @@ public class CheckUtils {
         } while (true);
     }
     public static boolean checkContinueActionMenu() {
-        System.out.println("Bạn có muốn tiếp tục thao tác quản lý không? Y/N");
-        String choiceContinueAction = scanner.nextLine().trim().toLowerCase();
-        switch (choiceContinueAction) {
-            case "y":
-                return true;
-            case "n":
-                return false;
-            default:
-                System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
-                return true;
-        }
+        boolean check = true;
+        do {
+            System.out.println("Bạn có muốn tiếp tục thao tác quản lý không? Y/N");
+            String choiceContinueAction = scanner.nextLine().trim().toLowerCase();
+            switch (choiceContinueAction) {
+                case "y":
+                    return true;
+                case "n":
+                    return false;
+                default:
+                    System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
+                    check = true;
+            }
+        } while(check);
+       return false;
     }
     public static boolean checkContinueUpdateMenu() {
+        boolean check = true;
         System.out.println("Đã chỉnh sửa thành công!");
-        System.out.println("Bạn có muốn tiếp tục chỉnh sửa không? Y/N");
-        String choiceContinueUpdateAction = scanner.nextLine().trim().toLowerCase();
-        switch (choiceContinueUpdateAction) {
-            case "y":
-                return true;
-            case "n":
-                return false;
-            default:
-                System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
-                return true;
-        }
+        do {
+            System.out.println("Bạn có muốn tiếp tục chỉnh sửa không? Y/N");
+            String choiceContinueUpdateAction = scanner.nextLine().trim().toLowerCase();
+            switch (choiceContinueUpdateAction) {
+                case "y":
+                    return true;
+                case "n":
+                    return false;
+                default:
+                    System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
+                    check = true;
+            }
+        } while (check);
+        return false;
     }
     public static boolean checkContinueRemoveAction() {
-        System.out.println("Bạn có muốn tiếp tục thao tác xoá không? Y/N");
-        String choiceContinueRemoveAction = scanner.nextLine().trim().toLowerCase();
-        switch (choiceContinueRemoveAction) {
-            case "y":
-                return true;
-            case "n":
-                return false;
-            default:
-                System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
-                return true;
-        }
+        boolean check =  true;
+        do {
+            System.out.println("Bạn có muốn tiếp tục thao tác xoá không? Y/N");
+            String choiceContinueRemoveAction = scanner.nextLine().trim().toLowerCase();
+            switch (choiceContinueRemoveAction) {
+                case "y":
+                    return true;
+                case "n":
+                    return false;
+                default:
+                    System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
+                    check = true;
+            }
+        }while (check);
+        return false;
     }
     public static boolean checkContinueAddAction() {
-        System.out.println("Bạn có muốn tiếp tục thêm không? Y/N");
-        String choiceContinueAction = scanner.nextLine().trim().toUpperCase();;
-        switch (choiceContinueAction){
-            case "Y":
-                return true;
-            case "N":
-                return false;
-            default:
-                System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
-                return true;
-        }
+        boolean check = true;
+        do {
+            System.out.println("Bạn có muốn tiếp tục thêm không? Y/N");
+            String choiceContinueAction = scanner.nextLine().trim().toUpperCase();;
+            switch (choiceContinueAction){
+                case "Y":
+                    return true;
+                case "N":
+                    return false;
+                default:
+                    System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
+                    check = true;
+            }
+        }while (check);
+        return false;
     }
     public static boolean checkContinueUpdateAction(){
-        System.out.println("Bạn có muốn tiếp tục chỉnh sửa không? Y/N");
-        String choiceContinueActionUser = scanner.nextLine().trim().toUpperCase();;
-        switch (choiceContinueActionUser){
-            case "Y":
-                return true;
-            case "N":
-                return false;
-            default:
-                System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
-                return true;
+        boolean check = true;
+        do {
+            System.out.println("Bạn có muốn tiếp tục chỉnh sửa không? Y/N");
+            String choiceContinueActionUser = scanner.nextLine().trim().toUpperCase();
+            switch (choiceContinueActionUser){
+                case "Y":
+                    return true;
+                case "N":
+                    return false;
+                default:
+                    System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
+                    check = true;
+            }
+        } while (check);
+        return false;
         }
-    }
+
     public static boolean checkContinueAddOrder() {
-        System.out.println("Bạn có muốn tiếp tục thuê thêm không? Y/N");
-        String choiceContinueAction = scanner.nextLine().trim().toUpperCase();
-        switch (choiceContinueAction){
-            case "Y":
-                return true;
-            case "N":
-                return false;
-            default:
-                System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
-                return true;
-        }
+        boolean check = true;
+        do {
+            System.out.println("Bạn có muốn tiếp tục thuê thêm không? Y/N");
+            String choiceContinueAction = scanner.nextLine().trim().toUpperCase();
+            switch (choiceContinueAction){
+                case "Y":
+                    return true;
+                case "N":
+                    return false;
+                default:
+                    System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
+                    check = true;
+            }
+        } while (check);
+        return false;
     }
     public static boolean checkContinueActionShowProfit() {
-        System.out.println("Bạn có muốn tiếp tục xem doanh thu không? Y/N");
-        String choiceContinueAction = scanner.nextLine().trim().toLowerCase();
-        switch (choiceContinueAction) {
-            case "y":
-                return true;
-            case "n":
-                return false;
-            default:
-                System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
-                return true;
-        }
+        boolean check = true;
+        do {
+            System.out.println("Bạn có muốn tiếp tục xem doanh thu không? Y/N");
+            String choiceContinueAction = scanner.nextLine().trim().toLowerCase();
+            switch (choiceContinueAction) {
+                case "y":
+                    return true;
+                case "n":
+                    return false;
+                default:
+                    System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
+                    check = true;
+            }
+        } while (check);
+        return false;
     }
     public static boolean checkActionConfirmReturn() {
-        System.out.println("Bạn có muốn xác nhận thanh toán không? Y/N");
-        String choiceContinueAction = scanner.next().trim().toLowerCase();
-        switch (choiceContinueAction) {
-            case "y":
-                return false;
-            case "n":
-                return true;
-            default:
-                System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
-                return true;
-        }
+        boolean check = true;
+        do {
+            System.out.println("Bạn có muốn xác nhận thanh toán không? Y/N");
+            String choiceContinueAction = scanner.next().trim().toLowerCase();
+            switch (choiceContinueAction) {
+                case "y":
+                    return false;
+                case "n":
+                    return true;
+                default:
+                    System.out.println("Vui lòng chọn đúng cú pháp Y hoặc N!");
+                    check = true;
+            }
+        }while (check);
+        return false;
     }
 }

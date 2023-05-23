@@ -51,11 +51,10 @@ public class UserView {
                     case 0:
                         System.exit(5);
                     default:
-                        System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn!");
+                        System.out.println("Wrong value! Please enter again!");
                 }
             } catch (Exception e) {
-                System.out.println("Lỗi! Vui lòng nhập lại");
-                e.printStackTrace();
+                System.out.println("Error! Please enter again!");
             }
         }while (checkActionMenu);
     }

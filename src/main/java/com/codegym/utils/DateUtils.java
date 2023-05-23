@@ -10,7 +10,7 @@ public class DateUtils {
         try {
             return formatter.parse(strDate);
         } catch (ParseException parseException) {
-            parseException.printStackTrace();
+            System.out.println("Format error!");
         }
         return null;
     }

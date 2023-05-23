@@ -139,7 +139,7 @@ public class User implements IModel<User> {
         return user;
     }
     public String toData() {
-        return String.format("║%15s║ %20s║ %15s║ %11s║ %15s║ %20s║ %15s║\n",userID,fullname,idcardnum,phone,address,email,role);
+        return String.format("║%15s║ %19s║ %15s║ %12s║ %15s║ %20s║ %15s║\n",userID,fullname,idcardnum,phone,address,email,role);
     }
 
 }

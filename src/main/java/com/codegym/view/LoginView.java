@@ -32,35 +32,34 @@ public class LoginView {
                     case 0:
                         System.exit(0);
                     default:
-                        System.out.println("Nhập sai! Vui lòng nhập lại!");
+                        System.out.println("Wrong value! Please enter again!");
                         break;
                 }
             } catch (Exception e) {
-                System.out.println("Sai cú pháp! Vui lòng nhập lại");
+                System.out.println("Wrong value! Please enter again!");
             }
         }
         while (checkLogin);
     }
     private void loginProgram(ERole role) {
         String username, password;
-        System.out.println("Tài khoản: ");
+        System.out.println("Username: ");
         username = CheckUtils.isEmpty();
-        System.out.println("Mật khẩu: ");
+        System.out.println("Password: ");
         password = CheckUtils.isEmpty();
         user = userService.login(username, password, role);
-//        long userId = user.getUserID();
         if (user == null) {
-            System.out.println("Tài khoản hoặc mật khẩu không đúng!");
+            System.out.println("Incorrect username or password!");
             CheckUtils.pressEnterToContinue();
         } else {
-            System.out.println("BẠN ĐÃ ĐĂNG NHẬP THÀNH CÔNG");
+            System.out.println("SUCCESSFUL LOGIN!");
             CheckUtils.pressEnterToContinue();
             if (role == ERole.ADMIN) {
-                System.out.println("Bạn đang đăng nhập với vai trò ADMIN");
+                System.out.println("You are logged in as ADMIN");
                 AdminView adminView = new AdminView();
                 adminView.launch(user);
             } else {
-                System.out.println("Bạn đang đăng nhập với vai trò USER");
+                System.out.println("You are logged in as USER");
                 UserView userView = new UserView();
                 userView.launch(user);
             }

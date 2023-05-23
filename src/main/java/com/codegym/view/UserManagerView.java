@@ -10,7 +10,6 @@ import com.codegym.utils.ValidateUtils;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.codegym.view.LoginView.user;
 
 public class UserManagerView {
     public UserService userService;
@@ -45,19 +44,18 @@ public class UserManagerView {
                     case 0:
                         System.exit(0);
                     default:
-                        System.out.println("Vui lòng nhập số tương ứng với chức năng đã chọn!");
+                        System.out.println("Wrong value! Please enter again!");
 
                 }
             } catch (Exception e) {
-                System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn!");
-                e.printStackTrace();
+                System.out.println("Wrong value! Please enter again!");
             }
         } while (checkActionMenu);
     }
 
     public void showUser(List<User> users) {
-        System.out.println("╔═════════════════════════════════════════════════DANH SÁCH NGƯỜI SỬ DỤNG═══════════════════════════════════════════════════╗");
-        System.out.printf("║%15s║ %20s║ %15s║ %11s║ %15s║ %20s║ %15s║\n", "ID", "Tên", "Số căn cước", "Điện thoại", "Địa chỉ", "Email", "Vai trò");
+        System.out.println("╔═════════════════════════════════════════════════════════USER LIST═════════════════════════════════════════════════════════╗");
+        System.out.printf("║%15s║ %19s║ %15s║ %11s║ %15s║ %20s║ %15s║\n", "ID", "Name", "ID Card Number", "Phone Number", "Address", "Email", "Role");
         for (User user : users) {
             System.out.print(user.toData());
         }
@@ -87,22 +85,21 @@ public class UserManagerView {
                 setRole(user);
                 userService.addUser(user);
             } catch (Exception e) {
-                System.out.println("Lỗi! Vui lòng nhập lại!");
-                e.printStackTrace();
+                System.out.println("Wrong value! Please enter again!");
             }
         }while (CheckUtils.checkContinueAddAction());
     }
 
     private String inputUsername() {
-        System.out.println("Nhập username: ");
+        System.out.println("Input username: ");
         String username;
         do {
             if (!ValidateUtils.isUsernameValid(username = CheckUtils.isEmpty())) {
-                System.out.println(username + " không đúng định dạng. Yêu cầu tối thiểu ba ký tự và không bao gồm chữ viết hoa!");
+                System.out.println(username + " is not in the correct format. Must be at least three characters and do not include capital letters!");
                 continue;
             }
             if (userService.existByUsername(username)) {
-                System.out.println(username + " đã tồn tại. Vui lòng nhập lại!");
+                System.out.println(username + " already exists. Please enter again!");
                 continue;
             }
             break;
@@ -111,24 +108,24 @@ public class UserManagerView {
     }
 
     private String inputPassword() {
-        System.out.println("Nhập mật khẩu: ");
+        System.out.println("Input password: ");
         String password;
         while (!ValidateUtils.isPassValid(password = CheckUtils.isEmpty())) {
-            System.out.println("Yêu cầu tối thiểu sáu ký tự, ít nhất một chữ cái viết hoa, một chữ cái viết thường, một chữ số và một ký tự đặc biệt!");
+            System.out.println("Must be at least six characters, at least one uppercase letter, one lowercase letter, one digit and one special character!");
         }
         return password;
     }
 
     private String inputIdCardNum() {
-        System.out.println("Nhập số căn cước: ");
+        System.out.println("Input ID card number: ");
         String idcardnum;
         do {
             if (!ValidateUtils.isIdCardNumValid(idcardnum = CheckUtils.isEmpty())) {
-                System.out.println("Yêu cầu bao gồm 12 chữ số và bắt đầu bằng chữ số 0!");
+                System.out.println("Must include 12 digits and start with the digit 0!");
                 continue;
             }
             if (userService.existByIdCardNum(idcardnum)) {
-                System.out.println("Số" + idcardnum + "đã tồn tại.Vui lòng nhập lại!");
+                System.out.println(idcardnum + " already exists. Please enter again!");
                 continue;
             }
             break;
@@ -138,33 +135,33 @@ public class UserManagerView {
     }
 
     private String inputFullname() {
-        System.out.println("Nhập tên: ");
+        System.out.println("Input name: ");
         String fullname;
         while (!ValidateUtils.isNameValid(fullname = CheckUtils.isEmpty())) {
-            System.out.println("Yêu cầu phải viết hoa chữ cái đầu ");
+            System.out.println("First letter capital required!");
         }
         return fullname;
     }
 
     private String inputAddress() {
-        System.out.println("Nhập địa chỉ: ");
+        System.out.println("Input address: ");
         String address;
         while (!ValidateUtils.isAddressValid(address = CheckUtils.isEmpty())) {
-            System.out.println("Yêu cầu viết hoa chữ cái đầu!");
+            System.out.println("First letter capital required!");
         }
         return address;
     }
 
     private String inputPhone() {
-        System.out.println("Nhập số điện thoại: ");
+        System.out.println("Input phone number: ");
         String phone;
         do {
             if (!ValidateUtils.isPhoneValid(phone = CheckUtils.isEmpty())) {
-                System.out.println("Yêu cầu số điện thoại gồm 10 chữ số và bắt đầu chữ số 0");
+                System.out.println("Requires a 10 digit phone number starting with 0!");
                 continue;
             }
             if (userService.existByPhone(phone)) {
-                System.out.println("Số điện thoại đã tồn tại. Vui lòng nhập lại!");
+                System.out.println("Phone number already exists. Please enter again!");
                 continue;
             }
             break;
@@ -173,15 +170,15 @@ public class UserManagerView {
     }
 
     private String inputEmail() {
-        System.out.println("Nhập email: ");
+        System.out.println("Input email: ");
         String email;
         do {
             if (!ValidateUtils.isEmailValid(email = CheckUtils.isEmpty())) {
-                System.out.println("Yêu cầu không bao gồm chữ viết hoa và phải bao gồm dấu @!");
+                System.out.println("Do not include capital letters and must include the @ sign!");
                 continue;
             }
             if (userService.existByEmail(email)) {
-                System.out.println("Email đã tồn tại. Vui lòng nhập lại!");
+                System.out.println("Email already exists. Please enter again!");
                 continue;
             }
             break;
@@ -205,11 +202,11 @@ public class UserManagerView {
                         isTrue = false;
                         break;
                     default:
-                        System.out.println("Vui lòng nhập số tương ứng với chức năng đã chọn!");
+                        System.out.println("Wrong value! Please enter again!");
                         break;
                 }
             } catch (Exception e) {
-                System.out.println("Vui lòng nhập số và không để trống!");
+                System.out.println("Wrong value! Please enter again!");
             }
         } while (isTrue);
     }
@@ -259,12 +256,11 @@ public class UserManagerView {
                     case 0:
                         System.exit(0);
                     default:
-                        System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");
+                        System.out.println("Wrong value! Please enter again!");
                         break;
                 } checkActionMenu = CheckUtils.checkContinueUpdateAction();
             } catch (Exception e) {
-                System.out.println("Vui lòng nhập số tương ứng với chức năng muốn chọn và không để trống!");
-                e.printStackTrace();
+                System.out.println("Wrong value! Please enter again!");
             }
         } while (checkActionMenu);
     }
@@ -272,17 +268,17 @@ public class UserManagerView {
         long id = 0;
         boolean checkActionMenu = true;
         do {
-            System.out.println("Nhập ID: ");
+            System.out.println("Input ID: ");
             try {
                 id = CheckUtils.isLongFormatCheck();
                 boolean isId = userService.existById(id);
                 if (isId) {
                     checkActionMenu = false;
                 } else {
-                    System.out.println("Không tìm thấy người dùng! Vui lòng nhập đúng ID!");
+                    System.out.println("User not found! Please enter the correct ID!");
                 }
             } catch (Exception e) {
-                System.out.println("Vui lòng nhập vào ID tương ứng và không để trống!");
+                System.out.println("Wrong value! Please enter again!");
             }
 
         } while (checkActionMenu);
@@ -297,25 +293,25 @@ public class UserManagerView {
             String choice;
 
             try {
-                System.out.println("Bạn có chắc chắn muốn xoá không? Y/N");
+                System.out.println("Are you sure to delete? Y/N");
                 choice = scanner.nextLine().trim().toLowerCase();
                 switch (choice) {
                     case "y":
                         if (user.getRole() == ERole.ADMIN) {
-                            System.out.println("Không thể xoá tài khoản Admin");
+                            System.out.println("Admin account cannot be deleted!");
                         } else {
                             userService.removeById(id);
-                            System.out.println("Xoá thành công!");
+                            System.out.println("DELETE SUCCESS!");
                         }
                         checkActionMenu = false;
                         break;
                     case "n" :
                         System.exit(0);
                     default:
-                        System.out.println("Vui lòng nhập Y hoặc N tương ứng với chức năng muốn chọn!");
+                        System.out.println("Please choose Y or N!");
                 }
             } catch (Exception e) {
-                System.out.println("Vui lòng nhập Y hoặc N tương ứng với chức năng muốn chọn và không để trống! ");
+                System.out.println("Wrong value! Please enter again!");
             }
         } while (checkActionMenu);
     }

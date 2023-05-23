@@ -4,7 +4,8 @@ import java.text.Normalizer;
 import java.util.regex.Pattern;
 
 public class ValidateUtils {
-    public static final String NAME_REGEX = "^([A-ZÀ-ỹ][a-zÀ-ỹ]*[ ]?){1,}$";
+
+    public static final String NAME_REGEX = "^([A-ZÀ-Ỹ][a-zÀ-ỹ]*[ ]?)+$";
     public static final String CARNAME_REGEX = "^([A-ZÀ-Ỹ0-9]*[ ]?){1,}$";
 
     public static final String BRANDNAME_REGEX = "^([A-ZÀ-Ỹ]*[ ]?){1,}$";
@@ -14,7 +15,7 @@ public class ValidateUtils {
     //Tối thiểu sáu ký tự, ít nhất một chữ cái viết hoa, một chữ cái viết thường, một chữ số và một ký tự đặc biệt
     public static final String EMAIL_REGEX = "^[_a-z0-9-\\+]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*(\\.[a-z]{2,})$";
     public static final String IDCARDNUM_REGEX = "^0\\d{11}$";
-    public static final String ADDRESS_REGEX = "^([A-ZÀ-ỹ][a-zÀ-ỹ]*[ ]?){2,}$";
+    public static final String ADDRESS_REGEX = "^([A-ZÀ-Ỹ][a-zÀ-ỹ]*[ ]?)+$";
 
     public static boolean isNameValid(String name) {
         return Pattern.compile(NAME_REGEX).matcher(name).matches();
@@ -60,4 +61,5 @@ public class ValidateUtils {
     public static boolean isMonth(String month) {
         return Pattern.matches(MONTH_REGEX, month);
     }
+
 }

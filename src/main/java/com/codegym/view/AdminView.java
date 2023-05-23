@@ -36,11 +36,11 @@ public class AdminView {
                     case 0:
                         System.exit(0);
                     default:
-                        System.out.println("Nhập sai! Vui lòng nhập lại!");
+                        System.out.println("Wrong value! Please enter again!");
 
                 }
             } catch (Exception e) {
-                System.out.println("Vui lòng nhập số tương ứng với chức năng đã cho!");
+                System.out.println("Error!");
             }
         } while (checkActionMenu);
     }
